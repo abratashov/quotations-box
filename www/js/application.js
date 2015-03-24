@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('quotationsApp', ['LocalStorageModule', 'angular-underscore', 'smart-table']);
+angular.module('quotationsApp', ['LocalStorageModule', 'angular-underscore', 'ngGrid']);
 
 
 //Этика - Социополитика - Философия Истории
