@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html ng-app="quotationsApp">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/application.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+
+    <script src="/lib/underscore.js"></script>
+    <script src="/lib/angular.js"></script>
+    <script src="/lib/angular-underscore.js"></script>
+    <script src="/lib/angular-local-storage.js"></script>
+    <script src="/lib/angular-resource.js"></script>
+    <script src="/lib/jquery-2.1.3.js"></script>
+    <script src="/lib/jquery.csv-0.71.min.js"></script>
+
+    <script>
+      var ng = angular;
+    </script>
+    <script src="/lib/smart-table/smart-table.module.js"></script>
+    <script src="/lib/smart-table/stConfig.js"></script>
+    <script src="/lib/smart-table/stPagination.js"></script>
+    <script src="/lib/smart-table/stPipe.js"></script>
+    <script src="/lib/smart-table/stSearch.js"></script>
+    <script src="/lib/smart-table/stSelectRow.js"></script>
+    <script src="/lib/smart-table/stSort.js"></script>
+    <script src="/lib/smart-table/stTable.js"></script>
+
+    <script src="/js/quotations-ru.js"></script>
+
+    <script src="/js/application.js"></script>
+    <script src="/js/services.js"></script>
+    <script src="/js/controllers.js"></script>
+
+
+  </head>
+  <body>
+    <div ng-controller="MainCtrl">
+      <h3>Жемчужины мудрости</h3>
+      <p>Подборка изречений выдающихся людей древности и современности, с возможностью удобного поиска по автору и ключевым словам. Также с возможностью всплывающих сообщений со случайно выбранной цитатой.<p>
+
+      <div align="center">
+        <table st-table="commonQuotations" class="table table-striped">
+          <thead>
+          <tr>
+            <th st-sort="1">Author</th>
+            <th st-sort="2">Quote</th>
+            <th st-sort="favorite">Favorite</th>
+          </tr>
+          <tr>
+            <th>
+              <input st-search="1" placeholder="search for author" class="input-sm form-control" type="search"/>
+            </th>
+            <th colspan="3">
+              <input st-search placeholder="global search" class="input-sm form-control" type="search"/>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="quote in commonQuotations">
+            <td>{{quote[1] | uppercase}}</td>
+            <td>{{quote[2]}}</td>
+            <td>{{false}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
