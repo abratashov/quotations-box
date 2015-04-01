@@ -1,50 +1,38 @@
 angular.module('quotationsApp')
   .controller('MainCtrl', ['$scope', '$filter', 'localStorageService', 'Quotations', function ($scope, $filter, localStorageService, Quotations) {
 
+    var languages = {
+      ru: [1, 2],
+      ua: [3, 4]
+    };
+
+    var lang = languages['ru'];
+
     Quotations.success(function(data, status, header, config){
       $scope.commonQuotations = [];
+      $scope.authors = [];
       $.csv.toArrays(data).forEach(function(quote){
         $scope.commonQuotations.push({
-          authorRu: quote[1],
-          textRu: quote[2]
+          author: quote[lang[0]],
+          text: quote[lang[1]]
         });
-        // console.log($scope.commonQuotations);
+        $scope.authors.push(quote[lang[0]]);
       });
-      console.log($scope.commonQuotations);
-      console.log($scope.rowCollection);
+
+      $scope.authors = $scope.authors.unique().sort();
+      $scope.searchBy = $scope.authors[0];
 
       $scope.myData = $scope.commonQuotations;
     });
 
-    $scope.filterOptions = {
-      filterText: '',
-      columnDefs: [
-        // { name: 'field1', displayName: 'pretty display name' },
-        { name: '$$hashKey', visible: false }
-      ]
+    $scope.search = function(search){
+      console.log(search);
+      $scope.searchBy = search;
     };
 
-    $scope.gridOptions = {
-      data: 'myData',
-      filterOptions: $scope.filterOptions
-    };
-
-    $scope.filterNephi = function() {
-      var filterText = 'name:Nephi';
-      if ($scope.filterOptions.filterText === '') {
-        $scope.filterOptions.filterText = filterText;
-      }
-      else if ($scope.filterOptions.filterText === filterText) {
-        $scope.filterOptions.filterText = '';
-      }
-    };
 
     // $scope.dictionary = localStorageService.get('en_dict')
   }]);
-
-//table
-//http://lorenzofox3.github.io/smart-table-website/
-//http://ui-grid.info/
 
 //csv
 //https://github.com/asafdav/ng-csv
