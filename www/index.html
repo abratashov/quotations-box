@@ -13,9 +13,11 @@
     <script src="/lib/angular-resource.js"></script>
     <script src="/lib/jquery-2.1.3.js"></script>
     <script src="/lib/jquery.csv-0.71.min.js"></script>
+    <script src="/lib/jquery.tagcloud.js"></script>
 
     <script src="/js/quotations-ru.js"></script>
 
+    <script src="/js/components.js"></script>
     <script src="/js/application.js"></script>
     <script src="/js/services.js"></script>
     <script src="/js/controllers.js"></script>
@@ -26,6 +28,13 @@
     <div ng-controller="MainCtrl">
       <h3>Жемчужины мудрости</h3>
       <p>Подборка изречений выдающихся людей древности и современности, с возможностью удобного поиска по автору и ключевым словам. Также с возможностью всплывающих сообщений со случайно выбранной цитатой.<p>
+
+      <div tag-cloud class="authors-cloud">
+        <a href="/path" rel="7">peace</a>
+        <a href="/path" rel="3">unity</a>
+        <a href="/path" rel="10">love</a>
+        <a href="/path" rel="5">having fun</a>
+      </div>
 
       <span ng-repeat="author in authors">
         <a ng-ref="/quotes/{{author}}" ng-click="search(author)">{{author}}</a>&nbsp;&nbsp;
