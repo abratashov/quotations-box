@@ -10,16 +10,18 @@ angular.module('quotationsApp')
 
     Quotations.success(function(data, status, header, config){
       $scope.commonQuotations = [];
-      $scope.authors = [];
+      $scope.authors = {};
       $.csv.toArrays(data).forEach(function(quote){
         $scope.commonQuotations.push({
           author: quote[lang[0]],
           text: quote[lang[1]]
         });
-        $scope.authors.push(quote[lang[0]]);
+        var count = $scope.authors[quote[lang[0]]];
+        count = count ? count + 1 : 1;
+        $scope.authors[quote[lang[0]]] = count;
       });
 
-      $scope.authors = $scope.authors.unique().sort();
+      $scope.author_list = Object.keys($scope.authors).sort();
       $scope.searchBy = $scope.authors[0];
 
       $scope.myData = $scope.commonQuotations;
