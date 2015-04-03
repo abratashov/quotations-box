@@ -1,6 +1,8 @@
 angular.module('quotationsApp')
   .controller('MainCtrl', ['$scope', '$filter', 'localStorageService', 'Quotations', function ($scope, $filter, localStorageService, Quotations) {
 
+    $scope.favorites = [];
+
     var languages = {
       ru: [1, 2],
       ua: [3, 4]
@@ -13,6 +15,7 @@ angular.module('quotationsApp')
       $scope.authors = {};
       $.csv.toArrays(data).forEach(function(quote){
         $scope.commonQuotations.push({
+          id: quote[0],
           author: quote[lang[0]],
           text: quote[lang[1]]
         });
@@ -22,7 +25,7 @@ angular.module('quotationsApp')
       });
 
       $scope.author_list = Object.keys($scope.authors).sort();
-      $scope.searchBy = $scope.authors[0];
+      $scope.searchBy = $scope.author_list[0];
 
       $scope.myData = $scope.commonQuotations;
     });
@@ -30,6 +33,11 @@ angular.module('quotationsApp')
     $scope.search = function(search){
       console.log(search);
       $scope.searchBy = search;
+    };
+
+    $scope.addFavorite = function(id){
+      var index = $scope.favorites.indexOf(id);
+      index == -1 ? $scope.favorites.push(id) : $scope.favorites.splice( index, 1 );
     };
 
 

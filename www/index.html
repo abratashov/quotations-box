@@ -29,21 +29,26 @@
       <h3>Жемчужины мудрости</h3>
       <p>Подборка изречений выдающихся людей древности и современности, с возможностью удобного поиска по автору и ключевым словам. Также с возможностью всплывающих сообщений со случайно выбранной цитатой.<p>
 
-      <div tag-cloud>
+      <div tag-cloud after="1000">
         <span  ng-repeat="author in author_list">
           <a ng-ref="/quotes/{{author}}" ng-click="search(author)" rel={{authors[author]}}>{{author}}</a>&nbsp;&nbsp;
         </span>
-      </div >
+      </div>
 
       <br>
       <input ng-model="searchBy">
       <br>
 
-      <div>
-        <div ng-repeat="quote in commonQuotations | filter:searchBy">
-          {{quote.text}}
-        </div>
-      </div>
+      <table ng-if="searchBy">
+        <tr ng-repeat="quote in commonQuotations | filter:searchBy">
+          <td ng-class="{star_empty: favorites.indexOf(quote.id) == -1, star_full: favorites.indexOf(quote.id) != -1}" ng-click="addFavorite(quote.id)">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td></td>
+          <td>
+            {{quote.text}}
+            <div class="author-sign" align="right">{{quote.author}}</div>
+          </td>
+        </tr>
+      </table>
       <br>
 
     </div>

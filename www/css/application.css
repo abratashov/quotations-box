@@ -3,8 +3,19 @@ body {
   margin: 15px;
 }
 
-.gridStyle {
-    border: 1px solid rgb(212,212,212);
-    width: auto;
-    height: 400px;
+.author-sign {
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+.star_empty {
+  background-image: url("/images/star-empty.png");
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+}
+
+.star_full {
+  background-image: url("/images/star-full.png");
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
 }
